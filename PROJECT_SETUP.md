@@ -109,30 +109,21 @@ A complete, production-ready end-to-end testing suite for Amazon using:
   - `verifySearchResults(productName)` - Validate results
   - `findAndNoteCheapestPrice()` - Price tracking
   - `addCheapestProductToBasket()` - Add to cart
-  - `getProductName()` - Extract product name
-  - `verifyProductDetailsLoaded()` - Wait for page load
 
 - ✅ **basketHelpers.js** - Shopping basket operations
   - `getBasketCount()` - Get item count
   - `verifyBasketCount(expectedCount)` - Assert count
-  - `navigateToBasket()` - Go to cart page
-  - `verifyProductInBasket(productName)` - Check product exists
   - `verifyProductAddedToBasket()` - Confirm addition
   - `getBasketTotal()` - Get total price
   - `getProductPrice(productElement)` - Extract price
   - `verifyBasketCalculation()` - Validate total calculation
   - `clearBasket()` - Remove all items
-  - `ensureBasketHasProducts(count)` - Setup helper
 
 - ✅ **navigationHelpers.js** - Page navigation and checkout
   - `proceedToCheckout()` - Start checkout flow
   - `verifyRedirectToRegistration()` - Check redirect
   - `verifyLoginRegistrationOptions()` - Verify form elements
   - `navigateToAmazonHomepage()` - Go to home
-  - `navigateBackToSearch()` - Go back
-  - `searchAndNavigate(searchTerm)` - Combined action
-  - `verifyUrlContains(urlPart)` - URL verification
-  - `waitForPageLoad()` - Wait for page ready
 
 - ✅ **commonHelpers.js** - Shared utility functions
   - `acceptCookiesIfPresent()` - Cookie handling

@@ -1,0 +1,55 @@
+{
+    "auth": {
+        "username": "dorinpisica_ikCevy",
+        "access_key": "8Uq669yLUHuQLnD1mygw"
+    },
+    "browsers": [
+        {
+            "browser": "chrome",
+            "os": "Windows 10",
+            "versions": [
+                "latest"
+            ]
+        },
+        {
+            "browser": "edge",
+            "os": "Windows 10",
+            "versions": [
+                "latest"
+            ]
+        },
+        {
+            "browser": "safari",
+            "os": "OS X Mojave",
+            "versions": [
+                "latest"
+            ]
+        },
+        {
+            "browser": "firefox",
+            "os": "OS X Catalina",
+            "versions": [
+                "latest"
+            ]
+        }
+    ],
+    "run_settings": {
+        "cypress_config_file": "cypress.config.js",
+        "project_name": "Test",
+        "build_name": "main",
+        "exclude": [],
+        "parallels": "4",
+        "npm_dependencies": {},
+        "auto_import_dev_dependencies": false,
+        "exclude_dependencies": [],
+        "package_config_options": {},
+        "headless": true
+    },
+    "connection_settings": {
+        "local": false,
+        "local_identifier": null,
+        "local_mode": null,
+        "local_config_file": null
+    },
+    "disable_usage_reporting": false
+}

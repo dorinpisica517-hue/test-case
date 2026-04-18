@@ -47,22 +47,3 @@ export function navigateToAmazonHomepage() {
   // Wait for page to stabilize
   cy.wait(2000);
 }
-
-export function navigateBackToSearch() {
-  cy.go("back");
-  cy.wait(1500);
-}
-
-export function searchAndNavigate(searchTerm) {
-  cy.visit("/", { failOnStatusCode: false });
-  cy.get('input#twotabsearchtextbox', { timeout: 15000 }).type(searchTerm + "{enter}");
-  cy.wait(1500);
-}
-
-export function verifyUrlContains(urlPart) {
-  cy.url().should("include", urlPart);
-}
-
-export function waitForPageLoad() {
-  cy.get("body", { timeout: 15000 }).should("exist");
-}

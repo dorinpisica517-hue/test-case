@@ -179,7 +179,6 @@ Scenario: Verify checkout redirects to registration for new users
 
 - `getBasketCount()` - Get current item count
 - `verifyBasketCount(expectedCount)` - Assert correct number of items
-- `navigateToBasket()` - Go to basket page
 - `verifyBasketCalculation()` - Validate total price calculation
 - `clearBasket()` - Remove all items from basket
 
@@ -188,7 +187,6 @@ Scenario: Verify checkout redirects to registration for new users
 - `proceedToCheckout()` - Start checkout process
 - `verifyRedirectToRegistration()` - Confirm redirection to login/signup
 - `navigateToAmazonHomepage()` - Go to Amazon home page
-- `searchAndNavigate(searchTerm)` - Search and navigate in one command
 
 ### Common Helpers (`commonHelpers.js`)
 
