@@ -1,23 +1,4 @@
 // Custom commands for Amazon testing
-Cypress.Commands.add('navigateToAmazon', () => {
-  cy.visit('https://www.amazon.com', { 
-    failOnStatusCode: false,
-    timeout: 30000 
-  })
-  cy.get('body').should('exist')
-})
-
-Cypress.Commands.add('searchProduct', (productName) => {
-  cy.get('input#twotabsearchtextbox').should('be.visible').click()
-  cy.get('input#twotabsearchtextbox').clear().type(productName)
-  cy.get('input[type="submit"]').first().click()
-})
-
-Cypress.Commands.add('getBasketCount', () => {
-  return cy.get('#nav-cart-count').invoke('text').then((count) => {
-    return parseInt(count.trim())
-  })
-})
 
 Cypress.Commands.add('goToBasket', () => {
   cy.get('#nav-cart-count-container').click()

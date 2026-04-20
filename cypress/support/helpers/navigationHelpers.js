@@ -1,13 +1,6 @@
 // Navigation helpers for checkout and page transitions
 export function proceedToCheckout() {
-  cy.visit("/cart");
-  cy.wait(1000);
-  
-  // Find and click the checkout button
-  cy.get("input[name='proceedToRetailCheckout'], button:contains('Proceed to checkout')")
-    .first()
-    .click({ force: true });
-	cy.wait(2000);
+  cy.get('[name="proceedToRetailCheckout"]').click();
 }
 
 export function verifyRedirectToRegistration() {
