@@ -28,7 +28,6 @@ This is a **production-ready** Cypress test suite with:
 - `productHelpers.js` - Product search & selection
 - `basketHelpers.js` - Cart operations
 - `navigationHelpers.js` - Page navigation
-- `commonHelpers.js` - Shared utilities
 
 ✅ **Multi-Browser Support**
 

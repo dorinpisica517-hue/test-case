@@ -113,20 +113,7 @@ A complete, production-ready end-to-end testing suite for Amazon using:
   - `verifyRedirectToRegistration()` - Check redirect
   - `verifyLoginRegistrationOptions()` - Verify form elements
   - `navigateToAmazonHomepage()` - Go to home
-
-- ✅ **commonHelpers.js** - Shared utility functions
-  - `waitForElement(selector)` - Element wait
-  - `scrollToElement(selector)` - Scroll actions
-  - `getElementText(selector)` - Get text
-  - `clickElement(selector)` - Click actions
-  - `typeText(selector, text)` - Type actions
-  - `verifyElementExists(selector)` - Existence check
-  - `verifyElementVisible(selector)` - Visibility check
-  - `verifyElementContainsText(selector, text)` - Text check
-  - `clearLocalStorage()` - Storage cleanup
-  - `clearCookies()` - Cookie cleanup
-  - `setViewport(width, height)` - Viewport setup
-  - `handleAmazonPopups()` - Popup handling
+  - `handleContinueShoppingIfPresent()` - Handle continue shopping modal
 
 ### 🎯 Support Files
 
@@ -181,7 +168,7 @@ A complete, production-ready end-to-end testing suite for Amazon using:
 
 ### ✅ DRY Principle
 
-- 4 separate helper files
+- 3 separate helper files
 - Reusable functions
 - No duplicate code
 - Clean step definitions
@@ -265,7 +252,7 @@ validate-setup.bat
 | ---------- | ------- | --------- |
 | **Documentation** | 4 | README, INSTALLATION, QUICK_START, PROJECT_SETUP |
 | **Test Files** | 1 | JavaScript test file (amazon-shopping.cy.js) |
-| **Helper Files** | 4 | productHelpers, basketHelpers, navigationHelpers, commonHelpers |
+| **Helper Files** | 3 | productHelpers, basketHelpers, navigationHelpers |
 | **Configuration** | 5 | cypress.config.js, platform-config.js, .env.example, package.json, generate-report.js |
 | **Support Files** | 2 | commands.js, e2e.js |
 | **Validation Scripts** | 2 | validate-setup.sh, validate-setup.bat |
@@ -412,7 +399,7 @@ The project includes BrowserStack configuration for cloud-based cross-browser te
 2. ✅ Quick start guide (QUICK_START.md)
 3. ✅ Full documentation (README.md)
 4. ✅ Complete test code (amazon-shopping.cy.js)
-5. ✅ Helper functions (4 helper files)
+5. ✅ Helper functions (3 helper files)
 6. ✅ Configuration files (cypress.config.js + platform-config.js)
 7. ✅ Automated HTML reporting (generate-report.js)
 8. ✅ Setup validation scripts (Windows + macOS/Linux)

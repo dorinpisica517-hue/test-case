@@ -139,8 +139,7 @@ amazon-e2e-testing/
 │   │   └── helpers/                   ← Reusable functions
 │   │       ├── productHelpers.js
 │   │       ├── basketHelpers.js
-│   │       ├── navigationHelpers.js
-│   │       └── commonHelpers.js
+│   │       └── navigationHelpers.js
 │   ├── reports/                       ← Generated test reports (HTML, JSON, XML)
 ├── generate-report.js                 ← HTML report generator script
 ├── cypress.config.js                  ← Main configuration file

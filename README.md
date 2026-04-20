@@ -161,8 +161,7 @@ amazon-e2e-testing/
 │   │   └── helpers/
 │   │       ├── productHelpers.js       # Product search/selection logic
 │   │       ├── basketHelpers.js        # Basket operations
-│   │       ├── navigationHelpers.js    # Navigation and checkout
-│   │       └── commonHelpers.js        # Shared utilities
+│   │       └── navigationHelpers.js    # Navigation and checkout
 │   ├── downloads/                      # Downloaded files during tests
 │   ├── fixtures/                       # Test data files
 │   ├── reports/                        # Generated test reports (HTML, JSON, XML)
@@ -227,10 +226,7 @@ The test suite includes comprehensive end-to-end scenarios written in descriptiv
 - `proceedToCheckout()` - Start the checkout process
 - `verifyRedirectToRegistration()` - Confirm redirection to login/signup page
 - `verifyLoginRegistrationOptions()` - Verify login and registration options are displayed
-
-### Common Helpers (`commonHelpers.js`)
-
-- Shared utility functions for common operations across tests
+- `handleContinueShoppingIfPresent()` - Handle Amazon's continue shopping modal if it appears
 
 ## 🔧 Configuration
 

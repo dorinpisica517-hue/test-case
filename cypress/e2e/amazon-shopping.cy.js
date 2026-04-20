@@ -1,13 +1,12 @@
 import * as ProductHelpers from "../support/helpers/productHelpers";
 import * as BasketHelpers from "../support/helpers/basketHelpers";
 import * as NavigationHelpers from "../support/helpers/navigationHelpers";
-import * as CommonHelpers from "../support/helpers/commonHelpers";
 
 describe("Amazon Shopping - Search and Basket Verification", () => {
   it("Search cheapest products, add them to cart and verify checkout redirect", () => {
     // Navigate to the Amazon homepage
     NavigationHelpers.navigateToAmazonHomepage();
-		NavigationHelpers.handleContinueShoppingIfPresent();
+    NavigationHelpers.handleContinueShoppingIfPresent();
 
     // Search for the cheapest Snickers and add it in your cart
     ProductHelpers.searchForProduct("Snickers");
