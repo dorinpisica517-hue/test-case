@@ -45,14 +45,6 @@ export function setViewport(width = 1280, height = 720) {
   cy.viewport(width, height);
 }
 
-export function navigateToAmazon() {
-  cy.visit("https://www.amazon.com", { 
-    failOnStatusCode: false,
-    timeout: 30000 
-  });
-  cy.get("body").should("exist");
-}
-
 export function handleAmazonPopups() {
   cy.get("body").then(($body) => {
     // Close any modal dialogs

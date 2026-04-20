@@ -104,12 +104,8 @@ A complete, production-ready end-to-end testing suite for Amazon using:
   - `addCheapestProductToBasket()` - Add to cart
 
 - ✅ **basketHelpers.js** - Shopping basket operations
-  - `getBasketCount()` - Get item count
   - `verifyBasketCount(expectedCount)` - Assert count
   - `verifyProductAddedToBasket()` - Confirm addition
-  - `getBasketTotal()` - Get total price
-  - `getProductPrice(productElement)` - Extract price
-  - `verifyBasketCalculation()` - Validate total calculation
   - `clearBasket()` - Remove all items
 
 - ✅ **navigationHelpers.js** - Page navigation and checkout
@@ -130,15 +126,11 @@ A complete, production-ready end-to-end testing suite for Amazon using:
   - `clearLocalStorage()` - Storage cleanup
   - `clearCookies()` - Cookie cleanup
   - `setViewport(width, height)` - Viewport setup
-  - `navigateToAmazon()` - Navigate to Amazon
   - `handleAmazonPopups()` - Popup handling
 
 ### 🎯 Support Files
 
 - ✅ **cypress/support/commands.js** - Custom Cypress commands
-  - `cy.navigateToAmazon()` - Custom command
-  - `cy.searchProduct(productName)` - Custom command
-  - `cy.getBasketCount()` - Custom command
   - `cy.goToBasket()` - Custom command
   - `cy.acceptCookies()` - Custom command
   - `cy.addToBasket()` - Custom command

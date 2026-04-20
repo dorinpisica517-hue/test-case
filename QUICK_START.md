@@ -318,22 +318,6 @@ When("I search for {string}", (productName) => {
 });
 ```
 
-### Verify basket calculation
-
-```javascript
-Then("basket total should be calculated correctly", () => {
-  BasketHelpers.verifyBasketCalculation();
-});
-```
-
-### Custom command usage
-
-```javascript
-cy.navigateToAmazon();
-cy.searchProduct("Snickers");
-cy.addToBasket();
-```
-
 ## ⚡ Performance Tips
 
 1. **Use CSS selectors** (faster than XPath):

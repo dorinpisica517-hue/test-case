@@ -1,14 +1,4 @@
 // Basket manipulation and verification helpers
-
-export function getBasketCount() {
-  return cy
-    .get("#nav-cart-count")
-    .invoke("text")
-    .then((count) => {
-      return parseInt(count.trim());
-    });
-}
-
 export function verifyBasketCount(expectedCount) {
   cy.get("#nav-cart-count")
     .invoke("text")

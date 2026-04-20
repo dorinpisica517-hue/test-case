@@ -3,12 +3,9 @@ Feature: Amazon Shopping Cart Management
   I want to search for products and manage my shopping cart
   So that I can purchase items efficiently
 
-  Background:
-    Given I am on the Amazon homepage
-    And I have accepted any cookies if prompted
-
   @smoke @critical @shopping
   Scenario: Complete shopping workflow with cheapest products
+	  Given I am on the Amazon homepage
     When I search for "Snickers" candy bars
     Then I should see search results containing "Snickers"
     And I sort the results by price from low to high

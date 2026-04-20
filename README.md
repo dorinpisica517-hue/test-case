@@ -172,7 +172,6 @@ amazon-e2e-testing/
 ├── cypress.config.js                   # Cypress configuration
 ├── generate-report.js                  # HTML report generator script
 ├── package.json                        # Dependencies and scripts
-├── platform-config.js                  # Multi-platform configuration
 ├── INSTALLATION.md                     # Detailed installation guide
 ├── PROJECT_SETUP.md                    # Project setup summary
 ├── QUICK_START.md                      # Developer quick reference
@@ -221,7 +220,6 @@ The test suite includes comprehensive end-to-end scenarios written in descriptiv
 
 - `addProductToCart()` - Add the selected product to the shopping basket
 - `verifyBasketCount(expectedCount)` - Assert the correct number of items in basket
-- `getBasketCount()` - Retrieve current basket item count
 
 ### Navigation Helpers (`navigationHelpers.js`)
 
