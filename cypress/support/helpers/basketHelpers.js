@@ -1,8 +1,4 @@
 // Basket manipulation and verification helpers
-function parsePriceText(text) {
-  const normalized = text.replace(/[^0-9.]/g, "");
-  return parseFloat(normalized);
-}
 
 export function getBasketCount() {
   return cy

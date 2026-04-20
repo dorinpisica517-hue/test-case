@@ -7,6 +7,7 @@ export function proceedToCheckout() {
   cy.get("input[name='proceedToRetailCheckout'], button:contains('Proceed to checkout')")
     .first()
     .click({ force: true });
+	cy.wait(2000);
 }
 
 export function verifyRedirectToRegistration() {
@@ -44,4 +45,23 @@ export function navigateToAmazonHomepage() {
   cy.get("body", { timeout: 15000 }).should("exist");
   // Wait for page to stabilize
   cy.wait(2000);
+}
+
+export function handleContinueShoppingIfPresent(attempts = 8) {
+  if (attempts === 0) {
+    cy.log('Continue shopping section not found, continuing...');
+    return;
+  }
+
+  cy.get('body').then(($body) => {
+    const hasMessage = $body.text().includes('Click the button below to continue shopping');
+
+    if (hasMessage) {
+      cy.contains('button, a, .a-button-text', 'Continue shopping')
+        .click({ force: true });
+    } else {
+      cy.wait(1000);
+      handleContinueShoppingIfPresent(attempts - 1);
+    }
+  });
 }

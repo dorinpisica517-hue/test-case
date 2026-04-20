@@ -7,6 +7,7 @@ describe("Amazon Shopping - Search and Basket Verification", () => {
   it("Search cheapest products, add them to cart and verify checkout redirect", () => {
     // Navigate to the Amazon homepage
     NavigationHelpers.navigateToAmazonHomepage();
+		NavigationHelpers.handleContinueShoppingIfPresent();
 
     // Search for the cheapest Snickers and add it in your cart
     ProductHelpers.searchForProduct("Snickers");
