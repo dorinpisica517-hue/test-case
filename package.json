@@ -8,10 +8,17 @@
     "test:edge": "cypress run --browser edge",
     "test:headed": "cypress open",
     "test:debug": "cypress run --headed --browser chrome --no-exit",
-    "test:all-browsers": "npm run test:chrome && npm run test:firefox && npm run test:edge"
+    "test:all-browsers": "npm run test:chrome && npm run test:firefox && npm run test:edge",
+    "test:smoke": "cypress run --env tags=@smoke",
+    "test:critical": "cypress run --env tags=@critical",
+    "test:regression": "cypress run --env tags=@regression",
+    "generate-report": "node generate-report.js"
   },
   "devDependencies": {
-    "cypress": "^13.0.0"
+    "@badeball/cypress-cucumber-preprocessor": "^24.0.1",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.8",
+    "cypress": "^13.0.0",
+    "multiple-cucumber-html-reporter": "^3.10.0"
   },
   "dependencies": {
     "dotenv": "^16.3.1"

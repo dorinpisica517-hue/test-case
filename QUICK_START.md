@@ -17,14 +17,11 @@ npm run test:chrome
 
 ## ✅ Project Status
 
-This is a **production-ready** Cypress + Cucumber test suite with:
+This is a **production-ready** Cypress test suite with:
 
-✅ **4 Complete Test Scenarios**
+✅ **Complete Test Scenario**
 
-- Search for cheapest products
-- Add multiple products and verify calculations
-- Check checkout redirection to registration
-- Verify basket persistence
+- Search for cheapest products, add to cart with checkout verification
 
 ✅ **Reusable Helper Functions** (DRY Principle)
 
@@ -55,10 +52,9 @@ This is a **production-ready** Cypress + Cucumber test suite with:
 
 | File | Purpose |
 | ------ | --------- |
-| `cypress.config.js` | Main configuration with Cucumber setup |
+| `cypress.config.js` | Main configuration |
 | `package.json` | Dependencies & scripts |
-| `cypress/e2e/amazon-shopping.feature` | Cucumber test scenarios (Gherkin) |
-| `cypress/e2e/amazon-shopping.cy.js` | Step definitions |
+| `cypress/e2e/amazon-shopping.cy.js` | Main test specification |
 | `cypress/support/helpers/` | Reusable function libraries |
 | `platform-config.js` | Browser & platform configurations |
 | `.env.example` | Environment variable template |
@@ -72,6 +68,7 @@ npm run test:edge          # Run all tests in Edge (headless)
 npm run test:headed        # Open interactive Cypress GUI
 npm run test:debug         # Run with visual debugging
 npm run test:all-browsers  # Run Chrome → Firefox → Edge
+npm run generate-report    # Generate professional HTML test reports
 ```
 
 ## 🎯 Example: Running a Specific Test
@@ -80,73 +77,54 @@ To run only critical tests:
 
 ```bash
 # Edit cypress.config.js and add:
-# specPattern: "cypress/e2e/*.feature"
+# specPattern: "cypress/e2e/*.cy.js"
 ```
 
 Or use Cypress filter in the GUI:
 
 ```bash
 npm run test:headed
-# Then select the feature file you want to run
+# Then select the test file you want to run
 ```
 
-## 🔗 Test Scenarios at a Glance
+## 🔗 Test Scenario at a Glance
 
-### Scenario 1: Search & Add Single Product
+### Complete Shopping Workflow
 
-```gherkin
-When I search for "Snickers"
-And I add the cheapest product to basket
-Then basket count should update to 1
-```
-
-### Scenario 2: Multiple Products & Calculation
-
-```gherkin
-When I search for "Snickers"
-And I add the cheapest product to basket
-And I search for "Skittles"
-And I add the cheapest product to basket
-Then basket total should be calculated correctly
-```
-
-### Scenario 3: Checkout Redirect
-
-```gherkin
-When I proceed to checkout
-Then I should be redirected to registration page
-```
-
-### Scenario 4: Navigation & Persistence
-
-```gherkin
-When I navigate back to search
-Then basket count should still be 1
-```
+1. Navigate to Amazon homepage
+2. Search for cheapest Snickers, add to cart
+3. Search for cheapest Skittles, add to cart
+4. Verify basket contains 2 items
+5. Proceed to checkout and verify login/registration redirect
 
 ## 🛠️ Customization Guide
 
 ### Add a New Test Scenario
 
-1. **Add to feature file** (`cypress/e2e/amazon-shopping.feature`):
-
-```gherkin
-@smoke
-Scenario: Your new scenario
-  When I do something
-  Then something should happen
-```
-
-1. **Add step definition** (`cypress/e2e/amazon-shopping.cy.js`):
+1. **Add to test file** (`cypress/e2e/amazon-shopping.cy.js`):
 
 ```javascript
-When("I do something", () => {
+it("As a customer, I want to [describe what you're testing]", () => {
+  // Your test code here
+  cy.visit('/');
+  // Add your test steps
+});
+```
+
+2. **Use helper functions** from `cypress/support/helpers/`:
+
+```javascript
+import { addToBasket, navigateToProduct } from '../support/helpers/basketHelpers';
+// Use the helpers in your test
+```
+
   // Your code here
 });
 
 Then("something should happen", () => {
   // Your assertion here
 });
+
 ```
 
 1. **Create helper if needed** (in `cypress/support/helpers/`):
@@ -216,6 +194,62 @@ e2e: {
    open cypress/videos/
    ```
 
+## ☁️ BrowserStack Integration
+
+Run tests on BrowserStack for cross-browser and cross-platform testing:
+
+### Setup BrowserStack
+
+1. **Get BrowserStack Credentials**
+   - Sign up at [browserstack.com](https://www.browserstack.com)
+   - Note your username and access key
+
+2. **Install BrowserStack Local**
+
+   ```bash
+   npm install -g browserstack-local
+   ```
+
+3. **Configure Credentials**
+   - Update `browserstack.json` with your credentials:
+
+   ```json
+   "auth": {
+     "username": "your_browserstack_username",
+     "access_key": "your_access_key"
+   }
+   ```
+
+### Run Tests on BrowserStack
+
+**Currently Configured Browsers:**
+
+- Chrome (Windows 10, latest)
+- Edge (Windows 10, latest)
+- Safari (OS X Mojave, latest)
+- Firefox (OS X Catalina, latest)
+
+**Command to run on BrowserStack:**
+
+```bash
+npm install -g @browserstack/local
+browserstack-cypress run
+```
+
+**Stop BrowserStack Local:**
+
+```bash
+browserstack-cypress stop
+```
+
+### BrowserStack Features
+
+- ✅ Test on 2000+ browser/OS combinations
+- ✅ Parallel test execution (4 parallel sessions configured)
+- ✅ Visual regression testing
+- ✅ Network throttling and geolocation testing
+- ✅ Detailed logs and video recordings
+
 ## 🔄 CI/CD Integration
 
 ### GitHub Actions
@@ -243,17 +277,35 @@ on:
 
 ## 📊 Test Reports
 
-Tests automatically generate:
+Tests automatically generate multiple report formats:
+
+### Automated HTML Reports
+
+```bash
+npm run generate-report
+```
+
+Creates professional reports at `cypress/reports/index.html` with:
+
+- Executive summary with pass/fail statistics
+- Business-readable test descriptions
+- Detailed execution times and error messages
+- One-click JSON export functionality
+- Print-friendly formatting
+
+### Additional Evidence
 
 - `cypress/screenshots/` - Screenshots on failure
-- `cypress/videos/` - Full test execution videos
-- Console output - Test results summary
+- `cypress/videos/` - Full test execution videos (kept only when tests fail)
+- `cypress/reports/test-results.json` - Machine-readable data
+- `cypress/reports/junit-*.xml` - CI/CD integration format
+- Console output - Real-time test results summary
 
 ## 🎓 Learning Resources
 
 - [Cypress Docs](https://docs.cypress.io/)
-- [Gherkin Syntax](https://cucumber.io/docs/gherkin/)
-- [BDD Testing](https://en.wikipedia.org/wiki/Behavior-driven_development)
+- [Cypress Best Practices](https://docs.cypress.io/guides/references/best-practices)
+- [JavaScript Testing](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing)
 
 ## 📝 Code Examples
 

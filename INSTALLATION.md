@@ -76,7 +76,6 @@ npm install
 This will:
 
 - Download Cypress (testing framework)
-- Download Cucumber preprocessor
 - Download other dependencies
 - Create a `node_modules/` folder
 
@@ -133,8 +132,7 @@ This will:
 amazon-e2e-testing/
 ├── cypress/
 │   ├── e2e/
-│   │   ├── amazon-shopping.feature    ← Cucumber test scenarios
-│   │   └── amazon-shopping.cy.js      ← Test steps implementation
+│   │   └── amazon-shopping.cy.js      ← Main test specification
 │   ├── support/
 │   │   ├── commands.js                ← Custom Cypress commands
 │   │   ├── e2e.js                     ← Setup and hooks
@@ -143,6 +141,8 @@ amazon-e2e-testing/
 │   │       ├── basketHelpers.js
 │   │       ├── navigationHelpers.js
 │   │       └── commonHelpers.js
+│   ├── reports/                       ← Generated test reports (HTML, JSON, XML)
+├── generate-report.js                 ← HTML report generator script
 ├── cypress.config.js                  ← Main configuration file
 ├── package.json                       ← Dependencies list
 ├── platform-config.js                 ← Multi-OS configuration
@@ -177,7 +177,7 @@ npm run test:all-browsers
 ### Successful Test Run
 
 ```
-Running: amazon-shopping.feature (1 of 1)
+Running: amazon-shopping.cy.js (1 of 1)
 ✓ Scenario: Search for cheapest snacks and add to basket (2ms)
 ✓ Scenario: Add multiple products and verify basket total (5ms)
 ✓ Scenario: Verify checkout redirects to registration (3ms)
@@ -197,6 +197,33 @@ If a test fails, you'll see:
 - Video recording of the test execution
 
 Check `cypress/screenshots/` and `cypress/videos/` directories.
+
+## 📊 Generating Test Reports
+
+After running tests, generate professional HTML reports:
+
+```bash
+npm run generate-report
+```
+
+This creates:
+
+- `cypress/reports/index.html` - Professional HTML report with executive summary
+- `cypress/reports/test-results.json` - Machine-readable data for CI/CD
+- `cypress/reports/junit-*.xml` - Standard format for test automation platforms
+
+### View Your Report
+
+```bash
+open cypress/reports/index.html
+```
+
+The HTML report includes:
+
+- ✅ Business-readable test descriptions
+- 📊 Pass/fail statistics and execution times
+- 📄 Export functionality for JSON data
+- 🖨️ Print-friendly formatting
 
 ## ⚙️ Configuration
 
@@ -277,6 +304,96 @@ npm install
 - Add explicit waits between actions
 - Check for hardcoded paths or URLs
 
+## ☁️ BrowserStack Cloud Testing
+
+Run tests across multiple browsers and operating systems using BrowserStack.
+
+### Prerequisites
+
+- BrowserStack account ([Sign up free](https://www.browserstack.com))
+- BrowserStack Local binary for local testing
+- Your BrowserStack username and access key
+
+### Installation
+
+1. **Install BrowserStack CLI globally**
+
+   ```bash
+   npm install -g @browserstack/local
+   ```
+
+2. **Update credentials in `browserstack.json`**
+
+   ```json
+   "auth": {
+     "username": "your_browserstack_username",
+     "access_key": "your_browserstack_access_key"
+   }
+   ```
+
+3. **Verify configuration**
+
+   ```bash
+   cat browserstack.json
+   ```
+
+### Running Tests on BrowserStack
+
+**Start BrowserStack tests:**
+
+```bash
+browserstack-cypress run
+```
+
+**The tests will run on all configured browsers:**
+
+- Chrome (Windows 10)
+- Edge (Windows 10)
+- Safari (OS X Mojave)
+- Firefox (OS X Catalina)
+
+**Monitor test progress:**
+
+- View live results in BrowserStack dashboard
+- Check video recordings of test execution
+- Download detailed reports
+
+### BrowserStack Configuration Options
+
+**Parallel Sessions** - Set in `browserstack.json`:
+
+```json
+"run_settings": {
+  "parallels": "4"
+}
+```
+
+**Project and Build Name:**
+
+```json
+"run_settings": {
+  "project_name": "Amazon E2E Tests",
+  "build_name": "v1.0.0"
+}
+```
+
+### Troubleshooting BrowserStack
+
+**Issue: "Authentication failed"**
+
+- Verify credentials in `browserstack.json`
+- Check BrowserStack account status
+
+**Issue: "Connection refused"**
+
+- Ensure BrowserStack Local is running
+- Check internet connection
+
+**Issue: "Tests timeout on BrowserStack"**
+
+- Increase timeout in `cypress.config.js`
+- Reduce number of parallel sessions
+
 ## 🌍 Continuous Integration (CI/CD)
 
 ### GitHub Actions Example
@@ -310,6 +427,34 @@ test:
     - npm run test:chrome
 ```
 
+### BrowserStack CI Integration Example
+
+Create `.github/workflows/browserstack.yml`:
+
+```yaml
+name: BrowserStack E2E Tests
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 18
+      - run: npm install
+      - run: npm install -g @browserstack/local
+      - run: |
+          BROWSERSTACK_USERNAME=${{ secrets.BROWSERSTACK_USERNAME }} \
+          BROWSERSTACK_ACCESS_KEY=${{ secrets.BROWSERSTACK_ACCESS_KEY }} \
+          browserstack-cypress run
+```
+
+Add your BrowserStack credentials as GitHub secrets:
+
+- `BROWSERSTACK_USERNAME`
+- `BROWSERSTACK_ACCESS_KEY`
+
 ## 💡 Tips for Success
 
 1. **Keep Amazon URL updated**: Amazon may change their URL structure
@@ -321,7 +466,7 @@ test:
 ## 📖 Next Steps
 
 1. Read [README.md](README.md) for full documentation
-2. Review test scenarios in `cypress/e2e/amazon-shopping.feature`
+2. Review test scenarios in `cypress/e2e/amazon-shopping.cy.js`
 3. Explore helper functions in `cypress/support/helpers/`
 4. Customize tests for your specific needs
 

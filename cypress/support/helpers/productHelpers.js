@@ -13,6 +13,5 @@ export function findCheapestProductPrice() {
   cy.get('.a-button-dropdown').click();
 	cy.get('.a-dropdown-link').contains('Price: Low to High').click();
 	cy.get('.s-product-image-container').eq(0).scrollIntoView().should('be.visible');
-	cy.pause();
 	cy.get('.s-product-image-container').eq(0).click();
 }

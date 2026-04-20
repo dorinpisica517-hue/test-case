@@ -5,9 +5,9 @@
 A complete, production-ready end-to-end testing suite for Amazon using:
 
 - **Cypress**: Modern testing framework
-- **Cucumber/Gherkin**: Business-readable test scenarios
 - **Multi-Browser Support**: Chrome, Firefox, Edge
 - **Multi-OS Support**: Windows, Linux, macOS
+- **Modular Helper Architecture**: Reusable functions for maintainable tests
 
 ---
 
@@ -16,11 +16,11 @@ A complete, production-ready end-to-end testing suite for Amazon using:
 ### 📁 Root Level Files
 
 - ✅ **package.json** - Dependencies & npm scripts
-  - Includes all necessary Cypress and Cucumber packages
+  - Includes all necessary Cypress packages
   - Scripts for Chrome, Firefox, Edge, debug mode
+  - `generate-report` script for automated HTML reporting
 
 - ✅ **cypress.config.js** - Main Cypress configuration
-  - Cucumber preprocessor setup
   - Multi-browser support configuration
   - Timeout and retry settings
   - Cross-platform compatibility
@@ -41,6 +41,12 @@ A complete, production-ready end-to-end testing suite for Amazon using:
   - Excludes node_modules, screenshots, videos
   - IDE and OS-specific files
   - Environment configuration files
+
+- ✅ **generate-report.js** - HTML report generator script
+  - Generates professional HTML reports from test results
+  - Creates business-readable test summaries
+  - Includes export functionality for JSON data
+  - Automated report generation after test execution
 
 ### 📖 Documentation Files
 
@@ -82,25 +88,12 @@ A complete, production-ready end-to-end testing suite for Amazon using:
 
 ### 🧪 Test Files
 
-- ✅ **cypress/e2e/amazon-shopping.feature** - Cucumber feature file
-  - 4 complete test scenarios in Gherkin syntax
-  - Background steps for common setup
-  - Tagged for filtering (@smoke, @critical, @regression, @accessibility)
-  - Descriptive steps for automated test reporting
-  - DRY principle: Reusable steps
-
-  **Scenarios included:**
-  1. Search and add cheapest Snickers
-  2. Add multiple products and verify calculation
-  3. Verify checkout redirects to registration
-  4. Navigation and basket persistence
-
-- ✅ **cypress/e2e/amazon-shopping.cy.js** - Step definitions
-  - 25+ step definitions
-  - Imports helper functions
-  - Cucumber/BDD syntax
-  - Session management
-  - Before hooks for setup
+- ✅ **cypress/e2e/amazon-shopping.cy.js** - Main test specification
+  - Complete shopping workflow test
+  - Searches for cheapest Snickers and Skittles
+  - Adds products to basket and verifies counts
+  - Tests checkout redirection to registration
+  - Uses modular helper functions
 
 ### 🛠️ Helper Functions (cypress/support/helpers/)
 
@@ -126,7 +119,6 @@ A complete, production-ready end-to-end testing suite for Amazon using:
   - `navigateToAmazonHomepage()` - Go to home
 
 - ✅ **commonHelpers.js** - Shared utility functions
-  - `acceptCookiesIfPresent()` - Cookie handling
   - `waitForElement(selector)` - Element wait
   - `scrollToElement(selector)` - Scroll actions
   - `getElementText(selector)` - Get text
@@ -187,13 +179,13 @@ A complete, production-ready end-to-end testing suite for Amazon using:
 - Check checkout flow
 - Validate registration redirection
 
-### ✅ Gherkin/Cucumber Format
+### ✅ Modular Test Structure
 
-- Business-readable scenarios
-- Step definitions in English
-- Tagged for filtering
-- Automated test reporting compatible
-- 4 complete end-to-end scenarios
+- Single comprehensive test scenario
+- Reusable helper functions
+- Clear test flow documentation
+- Easy to extend and maintain
+- Complete end-to-end shopping workflow
 
 ### ✅ DRY Principle
 
@@ -227,6 +219,15 @@ A complete, production-ready end-to-end testing suite for Amazon using:
 - **Inline comments** - Code documentation
 - **Validation scripts** - Verification tools
 
+### ✅ Automated Test Reporting
+
+- **HTML Reports** - Professional business-readable reports
+- **JSON Export** - Machine-readable data for CI/CD integration
+- **JUnit XML** - Standard format for test automation platforms
+- **Video on Failure** - Recordings kept only when tests fail
+- **Screenshot Capture** - Automatic failure evidence
+- **One-Click Generation** - `npm run generate-report` command
+
 ---
 
 ## 🚀 Quick Start Commands
@@ -253,6 +254,9 @@ npm run test:debug
 # Run all browsers
 npm run test:all-browsers
 
+# Generate HTML test report
+npm run generate-report
+
 # Validate setup (macOS/Linux)
 chmod +x validate-setup.sh
 ./validate-setup.sh
@@ -268,12 +272,55 @@ validate-setup.bat
 | Category | Count | Details |
 | ---------- | ------- | --------- |
 | **Documentation** | 4 | README, INSTALLATION, QUICK_START, PROJECT_SETUP |
-| **Test Files** | 2 | Feature file, Step definitions |
+| **Test Files** | 1 | JavaScript test file (amazon-shopping.cy.js) |
 | **Helper Files** | 4 | productHelpers, basketHelpers, navigationHelpers, commonHelpers |
-| **Configuration** | 4 | cypress.config.js, platform-config.js, .env.example, package.json |
+| **Configuration** | 5 | cypress.config.js, platform-config.js, .env.example, package.json, generate-report.js |
 | **Support Files** | 2 | commands.js, e2e.js |
 | **Validation Scripts** | 2 | validate-setup.sh, validate-setup.bat |
-| **Total Core Files** | 18 | + Git files |
+| **Total Core Files** | 19 | + Git files |
+
+---
+
+## ☁️ BrowserStack Integration
+
+### Overview
+
+The project includes BrowserStack configuration for cloud-based cross-browser testing:
+
+**Configuration File**: `browserstack.json`
+
+**Supported Platforms:**
+
+- Chrome on Windows 10 (latest)
+- Edge on Windows 10 (latest)
+- Safari on OS X Mojave (latest)
+- Firefox on OS X Catalina (latest)
+
+**Parallel Sessions**: 4 (configurable)
+
+### Setup Steps
+
+1. Install BrowserStack CLI:
+
+   ```bash
+   npm install -g @browserstack/local
+   ```
+
+2. Update credentials in `browserstack.json` with your BrowserStack account
+
+3. Run tests on BrowserStack:
+
+   ```bash
+   browserstack-cypress run
+   ```
+
+### Benefits
+
+- Test across multiple browsers and operating systems
+- Parallel execution for faster test cycles
+- Automatic screenshots and video recording
+- Network throttling and geolocation simulation
+- Detailed test logs and reports
 
 ---
 
@@ -283,8 +330,6 @@ validate-setup.bat
 
 ```json
 {
-  "@badeball/cypress-cucumber-preprocessor": "^20.0.0",
-  "@bahmutov/cypress-esbuild-bundler": "^2.2.1",
   "cypress": "^13.0.0"
 }
 ```
@@ -374,13 +419,15 @@ validate-setup.bat
 1. ✅ Installation guide (INSTALLATION.md)
 2. ✅ Quick start guide (QUICK_START.md)
 3. ✅ Full documentation (README.md)
-4. ✅ Complete test code (feature + step definitions)
+4. ✅ Complete test code (amazon-shopping.cy.js)
 5. ✅ Helper functions (4 helper files)
 6. ✅ Configuration files (cypress.config.js + platform-config.js)
-7. ✅ Setup validation scripts (Windows + macOS/Linux)
-8. ✅ NPM scripts ready to use
-9. ✅ No additional coding required
-10. ✅ Multi-browser and multi-OS support
+7. ✅ Automated HTML reporting (generate-report.js)
+8. ✅ Setup validation scripts (Windows + macOS/Linux)
+9. ✅ NPM scripts ready to use
+10. ✅ Professional test reports (HTML, JSON, XML)
+11. ✅ No additional coding required
+12. ✅ Multi-browser and multi-OS support
 
 ---
 
@@ -390,8 +437,9 @@ validate-setup.bat
 2. Install Node.js from nodejs.org
 3. Run `npm install`
 4. Run `npm run test:chrome` or `npm run test:headed`
-5. Review tests in cypress/e2e/amazon-shopping.feature
-6. Customize as needed using helper functions
+5. Generate professional HTML report: `npm run generate-report`
+6. View report at `cypress/reports/index.html`
+7. Customize as needed using helper functions
 
 ---
 
@@ -404,16 +452,18 @@ validate-setup.bat
 | **Full Docs** | README.md | Complete reference |
 | **Validation** | validate-setup.sh or .bat | Run after npm install |
 | **Run Tests** | Terminal | npm run test:chrome |
+| **Generate Report** | Terminal | npm run generate-report |
+| **View Report** | Browser | cypress/reports/index.html |
 | **View Tests** | cypress.config.js | Edit baseUrl for region |
-| **Add Tests** | amazon-shopping.feature | Gherkin syntax |
+| **Add Tests** | amazon-shopping.cy.js | JavaScript syntax |
 | **Add Logic** | cypress/support/helpers/ | JavaScript files |
 
 ---
 
 ## ✅ Quality Assurance
 
-- ✅ All 4 test scenarios complete
-- ✅ Gherkin/Cucumber format for reporting
+- ✅ Complete test scenario implemented
+- ✅ Modular helper architecture
 - ✅ DRY principle followed
 - ✅ Helper functions separated
 - ✅ Multi-browser support
@@ -434,7 +484,8 @@ The Amazon E2E Testing Suite is complete, tested, documented, and ready for imme
 **Version**: 1.0.0  
 **Created**: April 2026  
 **Status**: Production Ready  
-**Support**: Cross-browser, Cross-OS, Cloud Ready
+**Features**: Automated HTML Reporting, Video on Failure, Business-Readable Tests
+**Support**: Cross-browser, Cross-OS, Cloud Ready, CI/CD Integration
 
 ---
 

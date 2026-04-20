@@ -79,20 +79,11 @@ if exist "cypress.config.js" (
 )
 set /a CHECKS_TOTAL+=1
 
-if exist "cypress\e2e\amazon-shopping.feature" (
-    echo ✅ Feature file exists
-    set /a CHECKS_PASSED+=1
-) else (
-    echo ❌ Feature file NOT found
-    set VALIDATION_PASSED=false
-)
-set /a CHECKS_TOTAL+=1
-
 if exist "cypress\e2e\amazon-shopping.cy.js" (
-    echo ✅ Step definitions exist
+    echo ✅ Test file exists
     set /a CHECKS_PASSED+=1
 ) else (
-    echo ❌ Step definitions NOT found
+    echo ❌ Test file NOT found
     set VALIDATION_PASSED=false
 )
 set /a CHECKS_TOTAL+=1
@@ -185,15 +176,6 @@ if exist "node_modules\cypress" (
     set /a CHECKS_PASSED+=1
 ) else (
     echo ❌ Cypress NOT installed
-    set VALIDATION_PASSED=false
-)
-set /a CHECKS_TOTAL+=1
-
-if exist "node_modules\@badeball" (
-    echo ✅ Cucumber preprocessor installed
-    set /a CHECKS_PASSED+=1
-) else (
-    echo ❌ Cucumber preprocessor NOT installed
     set VALIDATION_PASSED=false
 )
 set /a CHECKS_TOTAL+=1

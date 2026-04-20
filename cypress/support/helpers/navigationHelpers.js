@@ -7,8 +7,6 @@ export function proceedToCheckout() {
   cy.get("input[name='proceedToRetailCheckout'], button:contains('Proceed to checkout')")
     .first()
     .click({ force: true });
-  
-  cy.wait(2000);
 }
 
 export function verifyRedirectToRegistration() {

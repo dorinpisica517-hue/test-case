@@ -45,8 +45,7 @@ echo "🗂️  Checking Project Structure..."
 check_item "cypress/ directory exists" "[ -d 'cypress' ]"
 check_item "package.json exists" "[ -f 'package.json' ]"
 check_item "cypress.config.js exists" "[ -f 'cypress.config.js' ]"
-check_item "Feature file exists" "[ -f 'cypress/e2e/amazon-shopping.feature' ]"
-check_item "Step definitions exist" "[ -f 'cypress/e2e/amazon-shopping.cy.js' ]"
+check_item "Test file exists" "[ -f 'cypress/e2e/amazon-shopping.cy.js' ]"
 echo ""
 
 # Check helper files
@@ -76,7 +75,6 @@ fi
 ((CHECKS_TOTAL++))
 
 check_item "Cypress installed" "[ -d 'node_modules/cypress' ]"
-check_item "Cucumber preprocessor installed" "[ -d 'node_modules/@badeball' ]"
 echo ""
 
 # Try to check Cypress version
