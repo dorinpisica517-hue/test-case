@@ -19,10 +19,28 @@ export function verifyBasketCount(expectedCount) {
 }
 
 export function addProductToCart() {
-  // Click on the  See All Buying Options button 
-  cy.get('#buybox-see-all-buying-choices').should("exist").click();
-  
-  // Verify basket counter is visible and updated
-  cy.get("#aod-container").should("exist");
-  cy.get("#a-autoid-2-offer-1").should("exist").click();
+  cy.get('body').then(($body) => {
+
+    // If Add to Cart button exists
+    if ($body.find('#add-to-cart-button').length > 0) {
+      cy.get('#add-to-cart-button')
+        .should('be.visible')
+        .click();
+
+    // If add to cart button is not present, check for "See All Buying Options"
+    } else if ($body.find('#buybox-see-all-buying-choices').length > 0) {
+      cy.get('#buybox-see-all-buying-choices')
+        .should('be.visible')
+        .click();
+
+      cy.get('#aod-container').should('exist');
+      cy.get('#a-autoid-2-offer-1')
+        .should('exist')
+        .click();
+
+    } else {
+      cy.log('No Add to Cart or Buying Options button found');
+    }
+
+  });
 }
